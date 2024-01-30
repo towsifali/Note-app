@@ -1,18 +1,7 @@
 .noteCard {
-    border-radius: 10px;
     background-color: cornsilk;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-    overflow: hidden;
 }
 
 .cardText {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: #333;
-    margin-bottom: 1rem;
+    white-space: pre-line;
 }
