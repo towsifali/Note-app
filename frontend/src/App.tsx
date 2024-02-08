@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { Note as NoteModel } from "./models/note";
 import Note from "./components/Note";
-import stlyes from "./styles/NotesPage.module.css";
-import { Col, Container, Row } from "react-bootstrap";
+import styles from "./styles/NotesPage.module.css";
+import * as NotesApi from "./network/notes_api";
 
 function App() {
   const [notes, setNotes] = useState<NoteModel[]>([]);
@@ -10,10 +11,7 @@ function App() {
   useEffect(() => {
     async function loadNotes() {
       try {
-        const response = await fetch("/api/notes", {
-          method: "GET",
-        });
-        const notes = await response.json();
+        const notes = await NotesApi.fetchNotes();
         setNotes(notes);
       } catch (error) {
         console.error(error);
@@ -27,8 +25,8 @@ function App() {
     <Container>
       <Row xs={1} md={2} xl={3} className="g-4">
         {notes.map((note) => (
-          <Col>
-            <Note note={note} key={note._id} className={stlyes.note} />
+          <Col key={note._id}>
+            <Note note={note} className={styles.note} />
           </Col>
         ))}
       </Row>
