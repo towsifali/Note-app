@@ -24,11 +24,11 @@ function App() {
     <Grid
       container
       spacing={10}
-      sx={{ padding: "3rem" }}
-      columns={{ xs: 4, sm: 8, md: 12 }}
+      columns={{ xs: 1, sm: 2, md: 3, lg: 3, xl: 3 }}
+      margin={0}
     >
       {notes.map((note) => (
-        <Grid item key={note._id} xs={8} sm={4} md={3} lg={2}>
+        <Grid item key={note._id}>
           <Note note={note} />
         </Grid>
       ))}

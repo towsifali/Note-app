@@ -28,6 +28,8 @@ const Note = ({ note, className }: NoteProps) => {
         backgroundColor: "cornsilk",
         transition: "box-shadow .2s ease-in-out",
         cursor: "pointer",
+        alignItems: "center",
+        padding: "0",
         "&:hover": {
           boxShadow:
             " rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
@@ -39,6 +41,7 @@ const Note = ({ note, className }: NoteProps) => {
           overflow: "hidden",
           maskImage: "linear-gradient(180deg, #000 60%, transparent)",
           height: "200px",
+          width: "300px",
           minWidth: "150px",
         }}
       >
