@@ -41,8 +41,8 @@ const Note = ({ note, className }: NoteProps) => {
           overflow: "hidden",
           maskImage: "linear-gradient(180deg, #000 60%, transparent)",
           height: "200px",
-          width: "300px",
           minWidth: "150px",
+          width: "250px",
         }}
       >
         <Typography
