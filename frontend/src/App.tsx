@@ -6,9 +6,12 @@ import Grid from "@mui/material/Grid";
 import { Box, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AddNoteDialog from "./components/AddNoteDialog";
+import { Spinner } from "react-bootstrap";
 
 function App() {
   const [notes, setNotes] = useState<NoteModel[]>([]);
+  const [notesLoading, setNotesLoading] = useState(true);
+  const [showNotesLoadingError, setShowNotesLoadingError] = useState(false);
 
   const [showAddNoteDialog, setShowAddNoteDialog] = useState(false);
 
@@ -17,11 +20,15 @@ function App() {
   useEffect(() => {
     async function loadNotes() {
       try {
+        setShowNotesLoadingError(false);
+        setNotesLoading(true);
         const notes = await NotesApi.fetchNotes();
         setNotes(notes);
       } catch (error) {
         console.error(error);
-        alert(error);
+        setShowNotesLoadingError(true);
+      } finally {
+        setNotesLoading(false);
       }
     }
     loadNotes();
@@ -37,9 +44,31 @@ function App() {
     }
   }
 
+  const notesGrid = (
+    <Grid container direction="row" justifyContent="start" alignItems="center">
+      {notes.map((note) => (
+        <Grid padding={"3rem"} item key={note._id} xs={12} sm={6} md={4}>
+          <Note
+            note={note}
+            onDeleteNoteClicked={deleteNote}
+            onNoteClicked={(n) => {
+              setNoteToEdit(n);
+              setShowAddNoteDialog(true);
+            }}
+          />
+        </Grid>
+      ))}
+    </Grid>
+  );
+
   return (
     <Box
-      sx={{ display: "flex", flexDirection: "column", alignContent: "center" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignContent: "center",
+        alignItems: "center",
+      }}
     >
       <Button
         size="medium"
@@ -55,25 +84,13 @@ function App() {
         <AddIcon fontSize="small" sx={{ marginRight: "0.3rem" }} />
         Add New Note
       </Button>
-      <Grid
-        container
-        direction="row"
-        justifyContent="start"
-        alignItems="center"
-      >
-        {notes.map((note) => (
-          <Grid padding={"3rem"} item key={note._id} xs={12} sm={6} md={4}>
-            <Note
-              note={note}
-              onDeleteNoteClicked={deleteNote}
-              onNoteClicked={(n) => {
-                setNoteToEdit(n);
-                setShowAddNoteDialog(true);
-              }}
-            />
-          </Grid>
-        ))}
-      </Grid>
+      {notesLoading && <Spinner animation="border" variant="primary" />}
+      {showNotesLoadingError && (
+        <p>Error loading notes. Please refresh the page</p>
+      )}
+      {!notesLoading && !showNotesLoadingError && (
+        <>{notes.length > 0 ? notesGrid : <p>No notes yet!</p>}</>
+      )}
       {showAddNoteDialog && (
         <AddNoteDialog
           isOpen={showAddNoteDialog}
