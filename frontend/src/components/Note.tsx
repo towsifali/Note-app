@@ -24,9 +24,6 @@ const Note = ({ note, onNoteClicked, onDeleteNoteClicked }: NoteProps) => {
 
   return (
     <Card
-      onClick={() => {
-        onNoteClicked(note);
-      }}
       sx={{
         backgroundColor: "cornsilk",
         transition: "box-shadow .2s ease-in-out",
@@ -39,7 +36,11 @@ const Note = ({ note, onNoteClicked, onDeleteNoteClicked }: NoteProps) => {
         },
       }}
     >
-      <CardActionArea>
+      <CardActionArea
+        onClick={() => {
+          onNoteClicked(note);
+        }}
+      >
         <CardContent
           sx={{
             overflow: "hidden",
