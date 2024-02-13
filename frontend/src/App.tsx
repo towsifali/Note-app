@@ -88,9 +88,11 @@ function App() {
       )}
       {noteToEdit && (
         <AddNoteDialog
+          noteToEdit={noteToEdit}
           isOpen={showAddNoteDialog}
           onDismiss={() => {
             setShowAddNoteDialog(false);
+            setNoteToEdit(null);
           }}
           onNoteSaved={(updatedNote) => {
             setNotes(
@@ -99,6 +101,7 @@ function App() {
               )
             );
             setNoteToEdit(null);
+            setShowAddNoteDialog(false);
           }}
         />
       )}
