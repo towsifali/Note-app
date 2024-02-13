@@ -7,14 +7,13 @@ import {
   TextField,
 } from "@mui/material";
 import { TextareaAutosize } from "@mui/base/TextareaAutosize";
-import React from "react";
 import { Note } from "../models/note";
 import { NoteInput } from "../network/notes_api";
 import * as NotesApi from "../network/notes_api";
-import { Form, useForm } from "react-hook-form";
-import { on } from "events";
+import { useForm } from "react-hook-form";
 
 interface AddNoteDialogProps {
+  noteToEdit?: Note;
   isOpen: boolean;
   onDismiss: () => void;
   onNoteSaved: (note: Note) => void;
@@ -23,16 +22,27 @@ interface AddNoteDialogProps {
 const AddNoteDialog = ({
   isOpen,
   onDismiss,
+  noteToEdit,
   onNoteSaved,
 }: AddNoteDialogProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<NoteInput>();
+  } = useForm<NoteInput>({
+    defaultValues: {
+      title: noteToEdit?.title || "",
+      text: noteToEdit?.text || "",
+    },
+  });
   async function onSubmit(data: NoteInput) {
     try {
-      const noteResponse = await NotesApi.createNote(data);
+      let noteResponse: Note;
+      if (noteToEdit) {
+        noteResponse = await NotesApi.updateNote(noteToEdit._id, data);
+      } else {
+        noteResponse = await NotesApi.createNote(data);
+      }
       onNoteSaved(noteResponse);
     } catch (error) {
       console.error(error);
@@ -50,7 +60,9 @@ const AddNoteDialog = ({
         onSubmit: handleSubmit(onSubmit),
       }}
     >
-      <DialogTitle sx={{ fontWeight: "400" }}>Add Note</DialogTitle>
+      <DialogTitle sx={{ fontWeight: "400" }}>
+        {noteToEdit ? "Edit Note" : "Add Note"}
+      </DialogTitle>
       <DialogContent
         sx={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
       >
@@ -73,7 +85,7 @@ const AddNoteDialog = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={onDismiss}>Cancel</Button>
-        <Button type="submit">Add</Button>
+        <Button type="submit">Save</Button>
       </DialogActions>
     </Dialog>
   );
