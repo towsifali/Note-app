@@ -7,6 +7,7 @@ import { Box, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AddNoteDialog from "./components/AddNoteDialog";
 import { Spinner } from "react-bootstrap";
+import SignUpModal from "./components/SignUpModal";
 
 function App() {
   const [notes, setNotes] = useState<NoteModel[]>([]);
@@ -121,6 +122,9 @@ function App() {
             setShowAddNoteDialog(false);
           }}
         />
+      )}
+      {true && (
+        <SignUpModal onDismiss={() => {}} onSignUpSuccessful={() => {}} />
       )}
     </Box>
   );
