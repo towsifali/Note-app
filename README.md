@@ -2,6 +2,10 @@
 
 MERN Notes is a secure and easy-to-use note-taking app that lets you capture your thoughts, ideas, and plans anywhere, anytime. With its intuitive interface and powerful features, MERN Notes is the perfect tool for staying organized and productive.
 
+![Login Page](pictures/login.png)
+
+![Landing Page](pictures/main.png)
+
 ## Features
 
 - **Create notes:** Quickly jot down notes with your phone or tablet.
@@ -36,5 +40,21 @@ MERN Notes is a powerful and versatile note-taking app that can help you stay or
 
 To clone and deploy MERN Notes on another PC, follow these steps:
 
-1. Clone the repository
-2. Navigate to backend and frontend directories respectively and run command:
+1. Clone the repository on your machine and cd into the Note-App folder
+2. Open a terminal and run the following commands:
+
+```bash
+cd backend
+npm install
+npm run start
+```
+
+3. Then in another terminal run:
+
+```bash
+cd frontend
+npm install
+npm run start
+```
+
+4. The app will be available at `http://localhost:3000`
