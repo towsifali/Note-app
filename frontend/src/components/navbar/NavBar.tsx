@@ -59,7 +59,7 @@ const NavBar = ({
                   color: "#fff",
                   alignSelf: "center",
                   marginLeft: "1rem",
-                  marginTop: "0.75rem",
+                  marginTop: "0.5rem",
                   fontSize: "1rem",
                 }}
                 variant="text"

@@ -3,7 +3,7 @@ import { Note as NoteModel } from "../models/note";
 import Note from "../components/Note";
 import * as NotesApi from "../network/notes_api";
 import Grid from "@mui/material/Grid";
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AddNoteDialog from "../components/AddNoteDialog";
 import { Spinner } from "react-bootstrap";
