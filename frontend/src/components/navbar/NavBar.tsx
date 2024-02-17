@@ -1,4 +1,11 @@
-import { AppBar, Box, Container, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Button,
+  Container,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import { User } from "../../models/user";
 import NavBarLoggedInView from "./NavBarLoggedInView";
 import NavBarLoggedOutView from "./NavBarLoggedOutView";
@@ -16,6 +23,7 @@ const NavBar = ({
   onLoginClicked,
   onLogoutSuccessful,
 }: NavBarProps) => {
+  const navItems = ["Privacy"];
   return (
     <AppBar position="static">
       <Container
@@ -23,12 +31,13 @@ const NavBar = ({
         sx={{
           display: "flex",
           flexDirection: "row",
-          justifyContent: "space-between",
         }}
       >
         <Typography
           variant="h4"
           noWrap
+          component={"a"}
+          href="/"
           sx={{
             alignSelf: "center",
             display: "flex",
@@ -42,23 +51,43 @@ const NavBar = ({
         </Typography>
         <Box
           sx={{
-            gap: "1rem",
             marginY: "1.5rem",
             display: "flex",
             justifyContent: "space-between",
+            flexGrow: 1,
           }}
         >
-          {loggedInUser ? (
-            <NavBarLoggedInView
-              user={loggedInUser}
-              onLogoutSuccessful={onLogoutSuccessful}
-            />
-          ) : (
-            <NavBarLoggedOutView
-              onLoginClicked={onLoginClicked}
-              onSignUpClicked={onSignUpClicked}
-            />
-          )}
+          <Box>
+            {navItems.map((item) => (
+              <Button
+                href={`/${item.toLowerCase()}`}
+                key={item}
+                sx={{ color: "#fff", alignSelf: "center", marginLeft: "1rem" }}
+                variant="text"
+              >
+                {item}
+              </Button>
+            ))}
+          </Box>
+          <Box
+            sx={{
+              gap: "1rem",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            {loggedInUser ? (
+              <NavBarLoggedInView
+                user={loggedInUser}
+                onLogoutSuccessful={onLogoutSuccessful}
+              />
+            ) : (
+              <NavBarLoggedOutView
+                onLoginClicked={onLoginClicked}
+                onSignUpClicked={onSignUpClicked}
+              />
+            )}
+          </Box>
         </Box>
       </Container>
     </AppBar>
