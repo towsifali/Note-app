@@ -1,4 +1,4 @@
-import { AppBar, Box, Container, Typography } from "@mui/material";
+import { AppBar, Box, Container, Toolbar, Typography } from "@mui/material";
 import { User } from "../../models/user";
 import NavBarLoggedInView from "./NavBarLoggedInView";
 import NavBarLoggedOutView from "./NavBarLoggedOutView";
@@ -27,19 +27,18 @@ const NavBar = ({
         }}
       >
         <Typography
-          variant="h3"
+          variant="h4"
           noWrap
           sx={{
-            m: 2,
-            display: { xs: "none", md: "flex" },
+            alignSelf: "center",
+            display: "flex",
             fontFamily: "Arial",
-            fontWeight: 700,
-            letterSpacing: ".2rem",
+            fontWeight: 400,
             color: "inherit",
             textDecoration: "none",
           }}
         >
-          MERN Notes App
+          MERN Notes
         </Typography>
         <Box
           sx={{
