@@ -72,7 +72,7 @@ const AddNoteDialog = ({
           margin="dense"
           label="Title"
           type="text"
-          variant="standard"
+          variant="outlined"
           {...register("title", { required: true })}
         />
         <TextareaAutosize
@@ -83,9 +83,30 @@ const AddNoteDialog = ({
           {...register("text")}
         />
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onDismiss}>Cancel</Button>
-        <Button type="submit">Save</Button>
+      <DialogActions
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignContent: "center",
+        }}
+      >
+        <Button
+          sx={{ margin: "5px", width: "50%" }}
+          disabled={isSubmitting}
+          variant="contained"
+          type="submit"
+          size="large"
+        >
+          Save Note
+        </Button>
+        <Button
+          sx={{ margin: "5px", width: "25%" }}
+          variant="outlined"
+          onClick={onDismiss}
+        >
+          Cancel
+        </Button>
       </DialogActions>
     </Dialog>
   );

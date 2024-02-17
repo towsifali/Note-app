@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { User } from "../models/user";
-import { SignUpCredentials } from "../network/notes_api";
+import { LogInCredentials } from "../network/notes_api";
 import * as NotesApi from "../network/notes_api";
 import {
   Button,
@@ -10,28 +10,27 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { Margin } from "@mui/icons-material";
 
-interface SignUpModalProps {
+interface LoginModalProps {
   isOpen: boolean;
   onDismiss: () => void;
-  onSignUpSuccessful: (user: User) => void;
+  onLoginSuccessful: (user: User) => void;
 }
-export const SignUpModal = ({
+const LoginModal = ({
   isOpen,
   onDismiss,
-  onSignUpSuccessful,
-}: SignUpModalProps) => {
+  onLoginSuccessful,
+}: LoginModalProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<SignUpCredentials>();
+  } = useForm<LogInCredentials>();
 
-  async function onSubmit(credentials: SignUpCredentials) {
+  async function onSubmit(credentials: LogInCredentials) {
     try {
-      const newUser = await NotesApi.signUp(credentials);
-      onSignUpSuccessful(newUser);
+      const user = await NotesApi.login(credentials);
+      onLoginSuccessful(user);
     } catch (error) {
       alert(error);
       console.log(error);
@@ -48,7 +47,7 @@ export const SignUpModal = ({
         onSubmit: handleSubmit(onSubmit),
       }}
     >
-      <DialogTitle sx={{ fontWeight: "400" }}>Sign Up</DialogTitle>
+      <DialogTitle sx={{ fontWeight: "400" }}>Log In</DialogTitle>
       <DialogContent
         sx={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
       >
@@ -60,15 +59,6 @@ export const SignUpModal = ({
           type="text"
           variant="outlined"
           {...register("username", { required: true })}
-        />
-        <TextField
-          autoFocus
-          required
-          margin="dense"
-          label="Email"
-          type="email"
-          variant="outlined"
-          {...register("email", { required: true })}
         />
         <TextField
           autoFocus
@@ -95,7 +85,7 @@ export const SignUpModal = ({
           type="submit"
           size="large"
         >
-          Sign up
+          Log in
         </Button>
         <Button
           sx={{ margin: "5px", width: "25%" }}
@@ -108,3 +98,5 @@ export const SignUpModal = ({
     </Dialog>
   );
 };
+
+export default LoginModal;
