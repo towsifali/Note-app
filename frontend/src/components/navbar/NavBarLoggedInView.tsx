@@ -1,7 +1,6 @@
 import { User } from "../../models/user";
 import * as NotesApi from "../../network/notes_api";
-import { IconButton, MenuItem } from "@mui/material";
-import { AccountCircle } from "@mui/icons-material";
+import { Avatar, IconButton, MenuItem } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import React from "react";
 
@@ -34,14 +33,16 @@ const NavBarLoggedInView = ({
   return (
     <div>
       <IconButton
-        size="large"
         aria-label="account of current user"
         aria-controls="menu-appbar"
         aria-haspopup="true"
         onClick={handleMenu}
         color="inherit"
       >
-        <AccountCircle />
+        <Avatar
+          alt={user.username.toUpperCase()}
+          src="../public/account-circle.svg"
+        />
       </IconButton>
       <Menu
         id="menu-appbar"

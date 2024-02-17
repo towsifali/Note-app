@@ -7,8 +7,9 @@ import * as NotesApi from "./network/notes_api";
 import NavBar from "./components/navbar/NavBar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NotePage from "./pages/NotePage";
-import PrivacyPage from "./pages/PrivacyPage";
+import AboutPage from "./pages/AboutPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import HelpPage from "./pages/HelpPage";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
@@ -42,7 +43,8 @@ function App() {
               path="/"
               element={<NotePage loggedInUser={loggedInUser} />}
             />
-            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/help" element={<HelpPage />} />
             <Route path="/*" element={<NotFoundPage />} />
           </Routes>
         </Container>

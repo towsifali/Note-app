@@ -16,7 +16,7 @@ const NavBar = ({
   onLoginClicked,
   onLogoutSuccessful,
 }: NavBarProps) => {
-  const navItems = ["Privacy"];
+  const navItems = ["About", "Help"];
   return (
     <AppBar position="static">
       <Container
@@ -55,7 +55,13 @@ const NavBar = ({
               <Button
                 href={`/${item.toLowerCase()}`}
                 key={item}
-                sx={{ color: "#fff", alignSelf: "center", marginLeft: "1rem" }}
+                sx={{
+                  color: "#fff",
+                  alignSelf: "center",
+                  marginLeft: "1rem",
+                  marginTop: "0.75rem",
+                  fontSize: "1rem",
+                }}
                 variant="text"
               >
                 {item}
